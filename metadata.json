@@ -1,0 +1,6 @@
+{
+  "name": "ÉLANORA | WhatsApp Fashion Storefront",
+  "description": "Modern luxury e-commerce fashion storefront featuring seamless direct-to-WhatsApp order fulfillment, interactive product catalog, variant selectors, and shopping bag concierge.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
