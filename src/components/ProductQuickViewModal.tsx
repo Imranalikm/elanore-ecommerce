@@ -66,17 +66,18 @@ export const ProductQuickViewModal: React.FC = () => {
   return (
     <div
       onClick={() => setQuickViewProduct(null)}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-xs"
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="bg-[#FAF8F5] rounded-3xl max-w-2xl w-full p-6 sm:p-7 shadow-2xl border border-stone-200 relative animate-in zoom-in-95 duration-150 max-h-[90vh] overflow-y-auto overscroll-contain"
+        className="bg-[#FAF8F5] rounded-3xl max-w-2xl w-full p-5 sm:p-7 shadow-2xl border border-stone-200 relative animate-in zoom-in-95 duration-150 max-h-[92vh] sm:max-h-[90vh] overflow-y-auto overscroll-contain"
       >
         
         {/* Close */}
         <button
           onClick={() => setQuickViewProduct(null)}
-          className="absolute top-4 right-4 p-2 rounded-full bg-white text-stone-500 hover:text-stone-900 border border-stone-200 shadow-xs z-10"
+          className="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 p-2 rounded-full bg-white text-stone-500 hover:text-stone-900 border border-stone-200 shadow-xs z-10"
+          aria-label="Close"
         >
           <X size={18} />
         </button>

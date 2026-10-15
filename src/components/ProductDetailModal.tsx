@@ -72,13 +72,13 @@ export const ProductDetailModal: React.FC = () => {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="bg-[#FAF8F5] rounded-3xl max-w-4xl w-full p-6 sm:p-8 shadow-2xl border border-stone-200 relative animate-in zoom-in-95 duration-200 max-h-[90vh] overflow-y-auto overscroll-contain"
+        className="bg-[#FAF8F5] rounded-3xl max-w-4xl w-full p-4 sm:p-8 shadow-2xl border border-stone-200 relative animate-in zoom-in-95 duration-200 max-h-[92vh] sm:max-h-[90vh] overflow-y-auto overscroll-contain"
       >
         
         {/* Close Button */}
         <button
           onClick={() => setActivePdpProduct(null)}
-          className="absolute top-5 right-5 p-2 rounded-full bg-white/80 hover:bg-stone-200/80 text-stone-600 hover:text-stone-900 transition-colors z-20"
+          className="absolute top-3.5 right-3.5 sm:top-5 sm:right-5 p-2 rounded-full bg-white/85 hover:bg-stone-200/80 text-stone-600 hover:text-stone-900 transition-colors z-20 shadow-xs"
           aria-label="Close details"
         >
           <X size={20} />
@@ -229,20 +229,22 @@ export const ProductDetailModal: React.FC = () => {
 
             {/* Quantity Stepper & Dual CTAs */}
             <div className="space-y-3 pt-2">
-              <div className="flex items-center gap-3">
-                <div className="flex items-center border border-stone-300 rounded-xl bg-white px-2 py-1">
+              <div className="flex items-center gap-2.5 sm:gap-3">
+                <div className="flex items-center border border-stone-300 rounded-xl bg-white px-2 py-1 shrink-0">
                   <button
                     onClick={() => setQuantity((q) => Math.max(1, q - 1))}
                     className="p-1.5 text-stone-500 hover:text-stone-900"
+                    aria-label="Decrease quantity"
                   >
                     -
                   </button>
-                  <span className="w-10 text-center font-medium text-xs tabular-nums text-stone-900">
+                  <span className="w-8 sm:w-10 text-center font-medium text-xs tabular-nums text-stone-900">
                     {quantity}
                   </span>
                   <button
                     onClick={() => setQuantity((q) => Math.min(product.stockCount, q + 1))}
                     className="p-1.5 text-stone-500 hover:text-stone-900"
+                    aria-label="Increase quantity"
                   >
                     +
                   </button>
@@ -251,18 +253,18 @@ export const ProductDetailModal: React.FC = () => {
                 {/* Primary WhatsApp Order Button */}
                 <button
                   onClick={handleDirectWhatsAppOrder}
-                  className="flex-1 py-3.5 px-4 bg-[#25D366] hover:bg-[#1ebd5b] text-white text-xs sm:text-sm font-semibold uppercase tracking-wider rounded-xl shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-98"
+                  className="flex-1 py-3 sm:py-3.5 px-3 sm:px-4 bg-[#25D366] hover:bg-[#1ebd5b] text-white text-xs sm:text-sm font-semibold uppercase tracking-wider rounded-xl shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-1.5 sm:gap-2 cursor-pointer active:scale-98"
                   title="Inquire directly on WhatsApp"
                 >
-                  <MessageSquare size={16} className="fill-white" />
-                  <span>Order Now via WhatsApp</span>
+                  <MessageSquare size={16} className="fill-white shrink-0" />
+                  <span className="truncate">Order via WhatsApp</span>
                 </button>
               </div>
 
               {/* Secondary Add to Cart Button */}
               <button
                 onClick={handleAddToCart}
-                className="w-full py-3.5 px-4 bg-[#181615] hover:bg-stone-800 text-white text-xs sm:text-sm font-medium uppercase tracking-wider rounded-xl shadow-sm transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-98"
+                className="w-full py-3 sm:py-3.5 px-4 bg-[#181615] hover:bg-stone-800 text-white text-xs sm:text-sm font-medium uppercase tracking-wider rounded-xl shadow-sm transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-98"
               >
                 <ShoppingBag size={16} />
                 <span>Add to Shopping Bag</span>

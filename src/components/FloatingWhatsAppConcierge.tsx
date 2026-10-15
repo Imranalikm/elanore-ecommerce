@@ -22,10 +22,10 @@ export const FloatingWhatsAppConcierge: React.FC = () => {
   };
 
   return (
-    <aside aria-label="Customer Support Concierge" className="fixed bottom-6 right-6 z-40">
+    <aside aria-label="Customer Support Concierge" className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40">
       {/* Expanded Quick Inquiries Popover */}
       {isOpen && (
-        <div className="mb-3 w-72 sm:w-80 bg-[#FAF8F5] rounded-2xl shadow-2xl border border-stone-200/90 p-4 animate-in slide-in-from-bottom-4 duration-200 max-h-[80vh] overflow-y-auto no-scrollbar">
+        <div className="mb-3 w-[calc(100vw-2rem)] max-w-xs sm:w-80 bg-[#FAF8F5] rounded-2xl shadow-2xl border border-stone-200/90 p-4 animate-in slide-in-from-bottom-4 duration-200 max-h-[75vh] overflow-y-auto no-scrollbar">
           <div className="flex items-center justify-between pb-3 border-b border-stone-200">
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-[#25D366] animate-pulse"></div>
@@ -85,7 +85,10 @@ export const FloatingWhatsAppConcierge: React.FC = () => {
         <span className="text-xs font-semibold tracking-wider uppercase hidden sm:inline">
           {isOpen ? 'Close' : 'Chat with Stylist'}
         </span>
-        <span className="absolute -top-1 -right-1 w-3 h-3 bg-emerald-300 rounded-full border-2 border-white animate-ping"></span>
+        <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5 pointer-events-none">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-300 opacity-75"></span>
+          <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-400 border-2 border-white"></span>
+        </span>
       </button>
     </aside>
   );

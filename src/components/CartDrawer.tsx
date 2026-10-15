@@ -70,14 +70,14 @@ export const CartDrawer: React.FC = () => {
         className="fixed inset-0 bg-black/50 backdrop-blur-xs transition-opacity duration-300"
       />
 
-      <div className="fixed inset-y-0 right-0 max-w-full flex pl-6 sm:pl-10">
+      <div className="fixed inset-y-0 right-0 max-w-full flex pl-0 sm:pl-10">
         <div className="w-full max-w-md bg-[#FAF8F5] shadow-2xl flex flex-col border-l border-stone-200 animate-in slide-in-from-right duration-300">
           
           {/* Drawer Header */}
-          <div className="p-6 border-b border-stone-200/80 flex items-center justify-between">
+          <div className="p-4 sm:p-6 border-b border-stone-200/80 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <ShoppingBag size={20} className="text-stone-900" />
-              <h2 className="font-serif text-xl font-semibold text-stone-900">Shopping Bag</h2>
+              <h2 className="font-serif text-lg sm:text-xl font-semibold text-stone-900">Shopping Bag</h2>
               <span className="text-xs text-stone-500 font-medium tabular-nums">({totalItemsCount})</span>
             </div>
             <button

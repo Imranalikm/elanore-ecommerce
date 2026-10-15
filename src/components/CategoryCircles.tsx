@@ -15,18 +15,18 @@ export const CategoryCircles: React.FC<CategoryCirclesProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
         {/* Category Row with horizontal scroll on small devices */}
-        <div className="flex items-center justify-between gap-4 sm:gap-6 md:gap-8 overflow-x-auto pb-4 pt-2 no-scrollbar scroll-smooth">
+        <div className="flex items-center justify-start md:justify-between gap-4 sm:gap-6 md:gap-8 overflow-x-auto pb-3 pt-1 px-1 no-scrollbar scroll-smooth touch-pan-x">
           {CATEGORIES.map((cat) => {
             const isSelected = activeCategory === cat.name;
             return (
               <button
                 key={cat.name}
                 onClick={() => onSelectCategory(cat.name)}
-                className="group flex flex-col items-center gap-3 shrink-0 focus:outline-none transition-transform active:scale-95 cursor-pointer"
+                className="group flex flex-col items-center gap-2.5 shrink-0 focus:outline-none transition-transform active:scale-95 cursor-pointer"
               >
                 {/* Circular Portrait Card */}
                 <div
-                  className={`w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full overflow-hidden p-1 transition-all duration-300 ${
+                  className={`w-[74px] h-[74px] sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full overflow-hidden p-1 transition-all duration-300 ${
                     isSelected
                       ? 'ring-2 ring-stone-900 ring-offset-2 ring-offset-[#FAF8F5] shadow-md scale-105'
                       : 'border border-stone-300/80 group-hover:border-stone-500 group-hover:shadow-md'

@@ -46,10 +46,10 @@ export const TestimonialsSection: React.FC = () => {
           {/* Left Arrow Button */}
           <button
             onClick={handlePrev}
-            className="absolute -left-3 sm:-left-5 top-1/2 -translate-y-1/2 z-10 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white border border-stone-300 text-stone-700 hover:text-stone-950 hover:border-stone-400 shadow-sm flex items-center justify-center transition-all cursor-pointer hover:scale-105 active:scale-95"
+            className="absolute left-0 sm:-left-5 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-11 sm:h-11 rounded-full bg-white/95 border border-stone-300 text-stone-700 hover:text-stone-950 hover:border-stone-400 shadow-md flex items-center justify-center transition-all cursor-pointer hover:scale-105 active:scale-95"
             aria-label="Previous review"
           >
-            <ChevronLeft size={18} />
+            <ChevronLeft size={16} />
           </button>
 
           {/* Desktop 3-Card Grid */}
@@ -93,13 +93,13 @@ export const TestimonialsSection: React.FC = () => {
           </div>
 
           {/* Mobile Single Card View */}
-          <div className="md:hidden w-full px-6">
+          <div className="md:hidden w-full px-7 sm:px-6">
             {(() => {
               const current = TESTIMONIALS[currentIndex];
               return (
                 <div
                   key={current.id}
-                  className="flex flex-col justify-between space-y-4 p-6 rounded-2xl bg-white/90 border border-stone-200 shadow-xs animate-in fade-in duration-200"
+                  className="flex flex-col justify-between space-y-4 p-5 sm:p-6 rounded-2xl bg-white/95 border border-stone-200 shadow-sm animate-in fade-in duration-200"
                 >
                   <div className="space-y-3">
                     <div className="flex items-center gap-1 text-[#181615]">
@@ -107,7 +107,7 @@ export const TestimonialsSection: React.FC = () => {
                         <Star key={i} size={14} className="fill-[#181615] text-[#181615]" />
                       ))}
                     </div>
-                    <p className="text-sm text-stone-700 leading-relaxed font-light italic">
+                    <p className="text-xs sm:text-sm text-stone-700 leading-relaxed font-light italic">
                       "{current.quote}"
                     </p>
                   </div>
@@ -133,10 +133,10 @@ export const TestimonialsSection: React.FC = () => {
           {/* Right Arrow Button */}
           <button
             onClick={handleNext}
-            className="absolute -right-3 sm:-right-5 top-1/2 -translate-y-1/2 z-10 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white border border-stone-300 text-stone-700 hover:text-stone-950 hover:border-stone-400 shadow-sm flex items-center justify-center transition-all cursor-pointer hover:scale-105 active:scale-95"
+            className="absolute right-0 sm:-right-5 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-11 sm:h-11 rounded-full bg-white/95 border border-stone-300 text-stone-700 hover:text-stone-950 hover:border-stone-400 shadow-md flex items-center justify-center transition-all cursor-pointer hover:scale-105 active:scale-95"
             aria-label="Next review"
           >
-            <ChevronRight size={18} />
+            <ChevronRight size={16} />
           </button>
         </div>
 

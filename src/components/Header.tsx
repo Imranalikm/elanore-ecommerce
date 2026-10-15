@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Search, ShoppingBag, Heart, MessageSquare, PhoneCall, Menu, X, ArrowRight, HelpCircle } from 'lucide-react';
+import { Search, ShoppingBag, Heart, MessageSquare, PhoneCall, Menu, X, ArrowRight, HelpCircle, Sparkles, Ruler } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { CustomerCareTab } from './CustomerCareModal';
+import { formatPhoneNumberDisplay } from '../utils/whatsapp';
 
 export interface NavigationOptions {
   category?: string;
@@ -70,9 +71,28 @@ export const Header: React.FC<HeaderProps> = ({
   return (
     <>
       {/* Top Announcement Bar */}
-      <div className="bg-[#181615] text-[#FAF8F5] text-[11px] sm:text-xs tracking-wider py-2 px-4 sm:px-8 border-b border-stone-800">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-1">
-          <div className="flex items-center gap-3">
+      <div className="bg-[#181615] text-[#FAF8F5] text-[11px] sm:text-xs tracking-wider py-2 px-3 sm:px-8 border-b border-stone-800">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
+          {/* Mobile concise banner */}
+          <div className="flex sm:hidden items-center justify-between w-full text-[10px] tracking-normal">
+            <button
+              onClick={() => onOpenCustomerCare?.('shipping')}
+              className="font-medium hover:underline text-left truncate"
+            >
+              Free Shipping Over $99
+            </button>
+            <span className="text-stone-500 mx-1.5">•</span>
+            <button
+              onClick={() => setIsSettingsOpen(true)}
+              className="text-stone-300 hover:text-white flex items-center gap-1 shrink-0"
+            >
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#25D366]"></span>
+              <span>WhatsApp Active</span>
+            </button>
+          </div>
+
+          {/* Desktop full bar */}
+          <div className="hidden sm:flex items-center gap-3">
             <button
               onClick={() => onOpenCustomerCare?.('shipping')}
               className="font-medium hover:underline cursor-pointer"
@@ -87,14 +107,14 @@ export const Header: React.FC<HeaderProps> = ({
               Easy Returns within 30 Days
             </button>
           </div>
-          <div className="flex items-center gap-4 text-stone-300">
+          <div className="hidden sm:flex items-center gap-4 text-stone-300">
             <button 
               onClick={() => setIsSettingsOpen(true)}
               className="hover:text-white transition-colors flex items-center gap-1.5 cursor-pointer"
               title="Configure WhatsApp phone number for testing"
             >
               <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#25D366]"></span>
-              <span>WhatsApp Concierge: +{whatsAppNumber.slice(0, 3)}...</span>
+              <span>WhatsApp Concierge: {formatPhoneNumberDisplay(whatsAppNumber)}</span>
             </button>
             <span className="text-stone-500">|</span>
             <button 
@@ -109,23 +129,23 @@ export const Header: React.FC<HeaderProps> = ({
 
       {/* Main Navigation Header */}
       <header className="sticky top-0 z-40 bg-[#FAF8F5]/95 backdrop-blur-md border-b border-[#EAE3D9] transition-all duration-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 h-20 flex items-center justify-between gap-4">
+        <div className="max-w-7xl mx-auto px-3 sm:px-8 h-16 sm:h-20 flex items-center justify-between gap-2 sm:gap-4">
           
           {/* Mobile Menu Button */}
-          <div className="flex items-center gap-2 lg:hidden">
+          <div className="flex items-center gap-1 sm:gap-2 lg:hidden">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 -ml-2 text-stone-800 hover:text-stone-950 transition-colors"
+              className="p-1.5 sm:p-2 -ml-1 text-stone-800 hover:text-stone-950 transition-colors"
               aria-label="Toggle menu"
             >
               {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
             <button
               onClick={() => setSearchOpen(true)}
-              className="p-2 text-stone-700 hover:text-stone-950"
+              className="p-1.5 sm:p-2 text-stone-700 hover:text-stone-950"
               aria-label="Search"
             >
-              <Search size={20} />
+              <Search size={19} />
             </button>
           </div>
 
@@ -135,7 +155,7 @@ export const Header: React.FC<HeaderProps> = ({
               onClick={() => onNavigate('home')}
               className="text-left group cursor-pointer"
             >
-              <span className="font-serif text-2xl sm:text-3xl tracking-[0.2em] uppercase font-semibold text-[#181615] group-hover:opacity-90 transition-opacity">
+              <span className="font-serif text-xl sm:text-2xl md:text-3xl tracking-[0.16em] sm:tracking-[0.2em] uppercase font-semibold text-[#181615] group-hover:opacity-90 transition-opacity">
                 ÉLANORA
               </span>
             </button>
@@ -202,7 +222,7 @@ export const Header: React.FC<HeaderProps> = ({
           </nav>
 
           {/* Right Action Icons */}
-          <div className="flex items-center gap-3 sm:gap-4">
+          <div className="flex items-center gap-1.5 sm:gap-3">
             {/* Desktop Search Button */}
             <button
               onClick={() => setSearchOpen(true)}
@@ -216,25 +236,26 @@ export const Header: React.FC<HeaderProps> = ({
             {/* WhatsApp Direct Order / Concierge Button */}
             <button
               onClick={() => setIsSettingsOpen(true)}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-emerald-800 bg-emerald-50 hover:bg-emerald-100 rounded-full border border-emerald-200/70 transition-colors cursor-pointer"
+              className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 text-[11px] sm:text-xs font-medium text-emerald-800 bg-emerald-50 hover:bg-emerald-100 rounded-full border border-emerald-200/70 transition-colors cursor-pointer"
               title="Click to configure or test WhatsApp recipient"
             >
-              <MessageSquare size={14} className="text-[#25D366] fill-[#25D366]" />
+              <MessageSquare size={13} className="text-[#25D366] fill-[#25D366] shrink-0" />
               <span className="hidden md:inline font-sans font-medium">WhatsApp Orders Active</span>
+              <span className="md:hidden font-sans font-medium">WhatsApp</span>
             </button>
 
             {/* Wishlist Icon */}
             <button
               onClick={() => onNavigate('shop', { filter: 'wishlist' })}
-              className={`p-2 hover:text-stone-950 relative hover:bg-stone-200/50 rounded-full transition-colors cursor-pointer ${
+              className={`p-1.5 sm:p-2 hover:text-stone-950 relative hover:bg-stone-200/50 rounded-full transition-colors cursor-pointer ${
                 activeFilter === 'wishlist' ? 'text-rose-600 bg-rose-50' : 'text-stone-700'
               }`}
               aria-label="Wishlist"
               title={wishlist.length > 0 ? `View ${wishlist.length} saved wishlist items` : 'Wishlist is empty'}
             >
-              <Heart size={20} strokeWidth={1.75} className={wishlist.length > 0 ? 'fill-rose-500 text-rose-500' : ''} />
+              <Heart size={19} strokeWidth={1.75} className={wishlist.length > 0 ? 'fill-rose-500 text-rose-500' : ''} />
               {wishlist.length > 0 && (
-                <span className="absolute top-1 right-1 w-4 h-4 bg-stone-900 text-white text-[10px] font-medium rounded-full flex items-center justify-center tabular-nums">
+                <span className="absolute top-0.5 right-0.5 sm:top-1 sm:right-1 w-4 h-4 bg-stone-900 text-white text-[10px] font-medium rounded-full flex items-center justify-center tabular-nums">
                   {wishlist.length}
                 </span>
               )}
@@ -243,12 +264,12 @@ export const Header: React.FC<HeaderProps> = ({
             {/* Shopping Bag Drawer Trigger */}
             <button
               onClick={() => setIsCartOpen(true)}
-              className="p-2 text-stone-900 hover:bg-stone-200/60 rounded-full relative transition-colors cursor-pointer"
+              className="p-1.5 sm:p-2 text-stone-900 hover:bg-stone-200/60 rounded-full relative transition-colors cursor-pointer"
               aria-label="Shopping bag"
               title="View shopping bag"
             >
-              <ShoppingBag size={21} strokeWidth={1.75} />
-              <span className="absolute -top-1 -right-1 min-w-[20px] h-5 bg-[#181615] text-[#FAF8F5] text-[11px] font-semibold rounded-full flex items-center justify-center px-1 tabular-nums shadow-sm">
+              <ShoppingBag size={20} strokeWidth={1.75} />
+              <span className="absolute -top-1 -right-1 min-w-[18px] sm:min-w-[20px] h-4 sm:h-5 bg-[#181615] text-[#FAF8F5] text-[10px] sm:text-[11px] font-semibold rounded-full flex items-center justify-center px-1 tabular-nums shadow-sm">
                 {totalItemsCount}
               </span>
             </button>
@@ -257,19 +278,47 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Mobile Slide-down Menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden bg-[#FAF8F5] border-b border-[#EAE3D9] px-6 py-6 space-y-4 animate-in slide-in-from-top duration-200">
-            <div className="flex flex-col space-y-3 text-sm tracking-wider uppercase font-medium text-stone-800">
+          <div className="lg:hidden bg-[#FAF8F5] border-b border-[#EAE3D9] px-4 sm:px-6 py-5 space-y-4 animate-in slide-in-from-top duration-200 max-h-[calc(100dvh-5rem)] overflow-y-auto">
+            <div className="flex flex-col space-y-1 text-sm tracking-wider uppercase font-medium text-stone-800">
               {navCategories.map((item, idx) => (
                 <button
                   key={idx}
                   onClick={() => handleNavClick(item)}
-                  className="text-left py-2 border-b border-stone-200/60 flex items-center justify-between"
+                  className="text-left py-2.5 px-2 hover:bg-stone-100/70 rounded-lg border-b border-stone-200/40 flex items-center justify-between"
                 >
                   <span>{item.label}</span>
                   <ArrowRight size={14} className="text-stone-400" />
                 </button>
               ))}
             </div>
+
+            {/* Customer Care Quick Links on Mobile */}
+            <div className="pt-2 border-t border-stone-200/80 space-y-2">
+              <span className="text-[10px] uppercase tracking-widest text-stone-400 font-semibold px-2">Customer Care & Sizing</span>
+              <div className="grid grid-cols-2 gap-2 text-xs">
+                <button
+                  onClick={() => {
+                    onOpenCustomerCare?.('sizing');
+                    setMobileMenuOpen(false);
+                  }}
+                  className="p-2.5 bg-stone-100 hover:bg-stone-200/80 text-stone-800 rounded-lg text-left flex items-center gap-1.5"
+                >
+                  <Ruler size={13} className="text-stone-600 shrink-0" />
+                  <span className="truncate">Size Guide</span>
+                </button>
+                <button
+                  onClick={() => {
+                    onOpenCustomerCare?.('faq');
+                    setMobileMenuOpen(false);
+                  }}
+                  className="p-2.5 bg-stone-100 hover:bg-stone-200/80 text-stone-800 rounded-lg text-left flex items-center gap-1.5"
+                >
+                  <HelpCircle size={13} className="text-stone-600 shrink-0" />
+                  <span className="truncate">FAQs & Help</span>
+                </button>
+              </div>
+            </div>
+
             <div className="pt-2 flex flex-col gap-2">
               <button
                 onClick={() => {
@@ -290,7 +339,7 @@ export const Header: React.FC<HeaderProps> = ({
                 className="w-full py-2.5 px-4 bg-emerald-50 text-emerald-800 rounded-lg text-xs font-medium flex items-center justify-center gap-2 border border-emerald-200"
               >
                 <MessageSquare size={16} className="text-[#25D366] fill-[#25D366]" />
-                <span>Configure WhatsApp Business Number</span>
+                <span>WhatsApp: {formatPhoneNumberDisplay(whatsAppNumber)}</span>
               </button>
             </div>
           </div>

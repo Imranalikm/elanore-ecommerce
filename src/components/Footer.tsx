@@ -3,6 +3,7 @@ import { Instagram, Facebook, MessageSquare, ShieldCheck, Heart } from 'lucide-r
 import { useCart } from '../context/CartContext';
 import { NavigationOptions } from './Header';
 import { CustomerCareTab } from './CustomerCareModal';
+import { formatPhoneNumberDisplay } from '../utils/whatsapp';
 
 interface FooterProps {
   onNavigate: (view: 'home' | 'shop', options?: NavigationOptions) => void;
@@ -73,7 +74,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenCustomerCare }
                 className="inline-flex items-center gap-2 text-[11px] text-emerald-800 font-medium hover:underline cursor-pointer"
               >
                 <span className="w-2 h-2 rounded-full bg-[#25D366]"></span>
-                <span>Active WhatsApp Concierge (+{whatsAppNumber.slice(0, 3)}...)</span>
+                <span>Active WhatsApp Concierge ({formatPhoneNumberDisplay(whatsAppNumber)})</span>
               </button>
             </div>
           </div>

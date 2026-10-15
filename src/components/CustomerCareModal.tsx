@@ -63,18 +63,18 @@ export const CustomerCareModal: React.FC<CustomerCareModalProps> = ({
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="bg-[#FAF8F5] rounded-3xl max-w-3xl w-full p-6 sm:p-8 shadow-2xl border border-stone-200 relative animate-in zoom-in-95 duration-200 max-h-[90vh] flex flex-col overscroll-contain"
+        className="bg-[#FAF8F5] rounded-3xl max-w-3xl w-full p-4 sm:p-8 shadow-2xl border border-stone-200 relative animate-in zoom-in-95 duration-200 max-h-[92vh] sm:max-h-[90vh] flex flex-col overscroll-contain"
       >
         
         {/* Modal Top Bar */}
-        <div className="flex items-center justify-between pb-4 border-b border-stone-200 shrink-0">
+        <div className="flex items-center justify-between pb-3 sm:pb-4 border-b border-stone-200 shrink-0">
           <div className="flex items-center gap-2.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#25D366] animate-pulse"></span>
+            <span className="w-2.5 h-2.5 rounded-full bg-[#25D366] animate-pulse shrink-0"></span>
             <div>
-              <h3 className="font-serif text-xl sm:text-2xl font-semibold text-stone-900">
+              <h3 className="font-serif text-lg sm:text-2xl font-semibold text-stone-900 leading-snug">
                 ÉLANORA Customer Concierge
               </h3>
-              <p className="text-xs text-stone-500">Luxury assistance, styling inquiries & boutique policies</p>
+              <p className="text-[11px] sm:text-xs text-stone-500">Luxury assistance, styling inquiries & boutique policies</p>
             </div>
           </div>
           <button
@@ -87,7 +87,7 @@ export const CustomerCareModal: React.FC<CustomerCareModalProps> = ({
         </div>
 
         {/* Tab Navigation Pill Strip */}
-        <div className="flex items-center gap-1.5 overflow-x-auto py-3 border-b border-stone-200/70 shrink-0 no-scrollbar text-xs">
+        <div className="flex items-center gap-1.5 overflow-x-auto py-2.5 sm:py-3 border-b border-stone-200/70 shrink-0 no-scrollbar touch-pan-x text-xs">
           {navItems.map((tab) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;

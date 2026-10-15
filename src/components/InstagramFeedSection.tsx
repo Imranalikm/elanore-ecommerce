@@ -29,12 +29,14 @@ export const InstagramFeedSection: React.FC = () => {
           </a>
         </div>
 
-        {/* 7 Square Editorial Image Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3 sm:gap-4">
+        {/* Square Editorial Image Grid - 3 cols on mobile (6 items), 4 on tablet, 7 on desktop */}
+        <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-7 gap-2.5 sm:gap-4">
           {images.map((img, idx) => (
             <div
               key={idx}
-              className="group relative aspect-square rounded-xl overflow-hidden bg-stone-200 border border-stone-200/80 cursor-pointer shadow-2xs"
+              className={`group relative aspect-square rounded-xl overflow-hidden bg-stone-200 border border-stone-200/80 cursor-pointer shadow-2xs ${
+                idx === 6 ? 'hidden sm:block' : ''
+              }`}
             >
               <img
                 src={img}

@@ -44,6 +44,21 @@ export const ShopCatalogView: React.FC<ShopCatalogViewProps> = ({
     setSpecialFilter(initialFilter);
   }, [initialFilter]);
 
+  // Lock scroll and handle Escape for mobile filter drawer
+  useEffect(() => {
+    if (mobileFilterOpen) {
+      document.body.style.overflow = 'hidden';
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') setMobileFilterOpen(false);
+      };
+      window.addEventListener('keydown', handleKeyDown);
+      return () => {
+        document.body.style.overflow = '';
+        window.removeEventListener('keydown', handleKeyDown);
+      };
+    }
+  }, [mobileFilterOpen]);
+
   const filteredProducts = useMemo(() => {
     return PRODUCTS.filter((item) => {
       // Special Filter
@@ -154,11 +169,11 @@ export const ShopCatalogView: React.FC<ShopCatalogViewProps> = ({
               </p>
             </div>
 
-            {/* Quick Mode Filters */}
-            <div className="flex items-center gap-2 flex-wrap">
+            {/* Quick Mode Filters - Horizontal swipe on mobile */}
+            <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 shrink-0 touch-pan-x -mx-1 px-1">
               <button
                 onClick={() => setSpecialFilter('all')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors shrink-0 ${
                   specialFilter === 'all'
                     ? 'bg-stone-900 text-white'
                     : 'bg-white text-stone-700 hover:bg-stone-100 border border-stone-200'
@@ -168,7 +183,7 @@ export const ShopCatalogView: React.FC<ShopCatalogViewProps> = ({
               </button>
               <button
                 onClick={() => setSpecialFilter('new')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center gap-1.5 ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center gap-1.5 shrink-0 ${
                   specialFilter === 'new'
                     ? 'bg-stone-900 text-white'
                     : 'bg-white text-stone-700 hover:bg-stone-100 border border-stone-200'
@@ -179,7 +194,7 @@ export const ShopCatalogView: React.FC<ShopCatalogViewProps> = ({
               </button>
               <button
                 onClick={() => setSpecialFilter('sale')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center gap-1.5 ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center gap-1.5 shrink-0 ${
                   specialFilter === 'sale'
                     ? 'bg-stone-900 text-white'
                     : 'bg-white text-stone-700 hover:bg-stone-100 border border-stone-200'
@@ -190,7 +205,7 @@ export const ShopCatalogView: React.FC<ShopCatalogViewProps> = ({
               </button>
               <button
                 onClick={() => setSpecialFilter('wishlist')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center gap-1.5 ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center gap-1.5 shrink-0 ${
                   specialFilter === 'wishlist'
                     ? 'bg-stone-900 text-white'
                     : 'bg-white text-stone-700 hover:bg-stone-100 border border-stone-200'
@@ -430,7 +445,7 @@ export const ShopCatalogView: React.FC<ShopCatalogViewProps> = ({
                 </button>
               </div>
             ) : (
-              <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+              <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 lg:gap-8">
                 {filteredProducts.map((prod) => (
                   <ProductCard key={prod.id} product={prod} />
                 ))}
@@ -444,11 +459,21 @@ export const ShopCatalogView: React.FC<ShopCatalogViewProps> = ({
 
       {/* Mobile Filters Modal */}
       {mobileFilterOpen && (
-        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex justify-end">
-          <div className="w-full max-w-xs bg-[#FAF8F5] h-full p-6 shadow-2xl overflow-y-auto space-y-6">
+        <div
+          onClick={() => setMobileFilterOpen(false)}
+          className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex justify-end"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="w-full max-w-xs bg-[#FAF8F5] h-full p-6 shadow-2xl overflow-y-auto space-y-6 overscroll-contain"
+          >
             <div className="flex items-center justify-between pb-4 border-b border-stone-200">
               <h3 className="font-serif text-lg font-semibold text-stone-900">Filters</h3>
-              <button onClick={() => setMobileFilterOpen(false)} className="p-1 text-stone-500">
+              <button
+                onClick={() => setMobileFilterOpen(false)}
+                className="p-1 text-stone-500 hover:text-stone-900"
+                aria-label="Close filters"
+              >
                 <X size={20} />
               </button>
             </div>

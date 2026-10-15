@@ -98,11 +98,11 @@ export const WhatsAppOrderReviewModal: React.FC = () => {
   return (
     <div
       onClick={() => setIsReviewModalOpen(false)}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-xs"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/60 backdrop-blur-xs"
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="bg-[#FAF8F5] rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl border border-stone-200 relative animate-in zoom-in-95 duration-200 max-h-[90vh] flex flex-col overscroll-contain"
+        className="bg-[#FAF8F5] rounded-3xl max-w-2xl w-full p-4 sm:p-8 shadow-2xl border border-stone-200 relative animate-in zoom-in-95 duration-200 max-h-[92vh] sm:max-h-[90vh] flex flex-col overscroll-contain"
       >
         
         {/* Header */}
@@ -284,27 +284,27 @@ export const WhatsAppOrderReviewModal: React.FC = () => {
 
         {/* Modal Action Buttons Footer */}
         {!orderDispatched && (
-          <div className="pt-4 border-t border-stone-200 flex flex-col sm:flex-row items-center justify-between gap-3 shrink-0">
+          <div className="pt-4 border-t border-stone-200 flex flex-col sm:flex-row items-center justify-between gap-2.5 sm:gap-3 shrink-0">
             <button
               onClick={() => setIsReviewModalOpen(false)}
-              className="w-full sm:w-auto px-5 py-2.5 text-xs uppercase tracking-wider font-medium text-stone-600 hover:text-stone-900 transition-colors"
+              className="w-full sm:w-auto px-4 py-2 text-xs uppercase tracking-wider font-medium text-stone-600 hover:text-stone-900 transition-colors order-2 sm:order-1 text-center"
             >
               Back to Bag
             </button>
 
-            <div className="w-full sm:w-auto flex items-center gap-2">
+            <div className="w-full sm:w-auto flex items-center gap-2 order-1 sm:order-2">
               <button
                 onClick={handleCopyMessage}
-                className="flex-1 sm:flex-none px-4 py-3 bg-stone-100 hover:bg-stone-200 text-stone-800 text-xs font-medium uppercase tracking-wider rounded-xl transition-colors flex items-center justify-center gap-1.5"
+                className="px-3.5 sm:px-4 py-3 bg-stone-100 hover:bg-stone-200 text-stone-800 text-xs font-medium uppercase tracking-wider rounded-xl transition-colors flex items-center justify-center gap-1.5 shrink-0"
                 title="Copy order message text"
               >
                 {copied ? <Check size={14} /> : <Copy size={14} />}
-                <span>{copied ? 'Copied' : 'Copy'}</span>
+                <span className="hidden xs:inline">{copied ? 'Copied' : 'Copy'}</span>
               </button>
 
               <button
                 onClick={handleOpenWhatsApp}
-                className="flex-2 sm:flex-none px-7 py-3 bg-[#25D366] hover:bg-[#1ebd5b] text-white text-xs sm:text-sm font-semibold uppercase tracking-wider rounded-xl shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-98"
+                className="flex-1 sm:flex-none px-5 sm:px-7 py-3 bg-[#25D366] hover:bg-[#1ebd5b] text-white text-xs sm:text-sm font-semibold uppercase tracking-wider rounded-xl shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-98"
               >
                 <Send size={16} />
                 <span>Open in WhatsApp</span>

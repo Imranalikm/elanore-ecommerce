@@ -1,13 +1,27 @@
 import { CartItem, CustomerOrderInfo, Product } from '../types';
 
-// Default business phone number (can be modified by user in settings modal)
-export const DEFAULT_WHATSAPP_NUMBER = '15553526672';
-export const WHATSAPP_STORAGE_KEY = 'elanora_whatsapp_number';
+// Default business phone number: +91 70129 25591 (India)
+export const DEFAULT_WHATSAPP_NUMBER = '917012925591';
+export const WHATSAPP_STORAGE_KEY = 'elanora_whatsapp_number_v2';
+
+export function formatPhoneNumberDisplay(num: string): string {
+  const clean = num.replace(/\D/g, '');
+  if (clean.startsWith('91') && clean.length === 12) {
+    return `+91 ${clean.slice(2, 7)} ${clean.slice(7)}`;
+  }
+  if (clean.length === 10) {
+    return `+91 ${clean.slice(0, 5)} ${clean.slice(5)}`;
+  }
+  return `+${clean}`;
+}
 
 export function getStoredWhatsAppNumber(): string {
   try {
-    const saved = localStorage.getItem(WHATSAPP_STORAGE_KEY);
-    return saved || DEFAULT_WHATSAPP_NUMBER;
+    const saved = localStorage.getItem(WHATSAPP_STORAGE_KEY) || localStorage.getItem('elanora_whatsapp_number');
+    if (!saved || saved === '15553526672') {
+      return DEFAULT_WHATSAPP_NUMBER;
+    }
+    return saved;
   } catch {
     return DEFAULT_WHATSAPP_NUMBER;
   }
@@ -15,8 +29,11 @@ export function getStoredWhatsAppNumber(): string {
 
 export function setStoredWhatsAppNumber(num: string): void {
   try {
-    const clean = num.replace(/\D/g, '');
-    localStorage.setItem(WHATSAPP_STORAGE_KEY, clean);
+    let clean = num.replace(/\D/g, '');
+    if (clean.length === 10) {
+      clean = `91${clean}`;
+    }
+    localStorage.setItem(WHATSAPP_STORAGE_KEY, clean || DEFAULT_WHATSAPP_NUMBER);
   } catch {
     // fallback
   }
